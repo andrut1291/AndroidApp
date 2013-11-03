@@ -3,6 +3,7 @@ package com.example.login;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 public class SetPrivilleges extends Activity {
 
