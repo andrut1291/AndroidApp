@@ -19,16 +19,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class AdminPanel extends Activity {
@@ -46,15 +43,18 @@ public class AdminPanel extends Activity {
 		// React to user clicks on item
 		listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-		     public void onItemClick(AdapterView<?> parentAdapter, View view, int position,
+			@SuppressWarnings("unchecked")
+			public void onItemClick(AdapterView<?> parentAdapter, View view, int position,
 		                             long id) {
 
 		         // We know the View is a TextView so we can cast it
 		         //TextView clickedView = (TextView) view;
-		    	 HashMap<String,String> newHash = new HashMap();
+		    	 HashMap<String,String> newHash = new HashMap<String,String>();
 		    	 newHash=(HashMap<String, String>) listView.getItemAtPosition(position);
-		         Toast.makeText(AdminPanel.this, "Item with id ["+id+"] - Position ["+position+"] "+newHash.get("line1").toString(), Toast.LENGTH_SHORT).show();
-
+		    	 String userName = newHash.get("line1").toString();
+		    	 Intent userInfo = new Intent("com.example.login.SetPrivilleges");
+		    	 userInfo.putExtra("username", userName);
+		    	 startActivity(userInfo);
 		     }
 		});
 		

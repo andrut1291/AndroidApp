@@ -14,5 +14,8 @@
     <string name="MainMenu">Menu główne</string>
     <string name="admin_panel">Panel administratora</string>
     <string name="choose_user">Wybierz użytkownika</string>
+    <string name="delate_acc">Usuń konto</string>
+    <string name="set_privilleges">Nadaj uprawnienia</string>
+    <string name="exit">Wyjście</string>
 
 </resources>
