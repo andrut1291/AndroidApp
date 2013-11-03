@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">FactMonitor</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="register">Rejestracja</string>
+    <string name="Register">Zarejestruj się</string>
+    <string name="Login">Zaloguj się</string>
+    <string name="Email">Nazwa użytkownika</string>
+    <string name="Password">Hasło</string>
+    <string name="register_new_user">Nie masz jeszcze konta? Zarejestruj się!</string>
+    <string name="login_new_user">Masz już konto? Zaloguj się!</string>
+    <string name="MainMenu">Menu główne</string>
+    <string name="admin_panel">Panel administratora</string>
+    <string name="choose_user">Wybierz użytkownika</string>
+
+</resources>
