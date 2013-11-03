@@ -52,8 +52,11 @@ public class AdminPanel extends Activity {
 		    	 HashMap<String,String> newHash = new HashMap<String,String>();
 		    	 newHash=(HashMap<String, String>) listView.getItemAtPosition(position);
 		    	 String userName = newHash.get("line1").toString();
+		    	 String accepted = newHash.get("line2").toString();
 		    	 Intent userInfo = new Intent("com.example.login.SetPrivilleges");
+		    	 //przekazanie danych Username oraz accpeted do nowego activity
 		    	 userInfo.putExtra("username", userName);
+		    	 userInfo.putExtra("accepted", accepted);
 		    	 startActivity(userInfo);
 		     }
 		});

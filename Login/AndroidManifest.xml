@@ -45,6 +45,14 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+                 <activity
+            android:name="com.example.login.SetPrivilleges"
+            android:label="@string/admin_panel" >
+            <intent-filter>
+                <action android:name="com.example.login.SetPrivilleges" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
