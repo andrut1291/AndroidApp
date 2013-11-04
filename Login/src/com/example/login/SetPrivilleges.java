@@ -35,8 +35,9 @@ public class SetPrivilleges extends Activity {
 		Bundle extras = getIntent().getExtras();
 		final String un;
 		final String accepted;
+		setContentView(R.layout.user_info);
 		//Wymaga do³o¿enia obs³ugi kiedy wyst¹pi b³¹d przekazania stringów
-		accepted = extras.getString("accepted");
+		accepted = extras.getString("accepted").substring(15);
 		un = extras.getString("username");
 		pb=(ProgressBar)findViewById(R.id.progressBarpb);
 		pb.setVisibility(View.GONE);
@@ -44,12 +45,11 @@ public class SetPrivilleges extends Activity {
 		userName = (TextView) findViewById(R.id.textViewUserName);
 		userName.setText((CharSequence)un);
 		delateAccount = (Button)findViewById(R.id.buttonDelateAccount);
-		setContentView(R.layout.user_info);
 		onOff = (ToggleButton)findViewById(R.id.toggleButtonSetPrivilleges);
-		if(accepted.contentEquals("Nie"))
-			onOff.setActivated(false);
+		if(accepted.contains("Nie"))
+			onOff.setChecked(false);
 		else
-			onOff.setActivated(true);
+			onOff.setChecked(true);
 		exit.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -65,7 +65,21 @@ public class SetPrivilleges extends Activity {
 				// TODO Auto-generated method stub
 				pb.setVisibility(View.VISIBLE);
 				new MyAsyncTaskDelate().execute(un,accepted);
-				
+			}
+		});
+		onOff.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				pb.setVisibility(View.VISIBLE);
+				MyAsyncTaskAccept setPrivilleges = new MyAsyncTaskAccept();
+				setPrivilleges.execute(un,accepted);
+				if(onOff.isActivated()==true){
+					onOff.setActivated(false);
+				}
+				else
+					onOff.setActivated(true);
 			}
 		});
 		
@@ -121,6 +135,56 @@ public class SetPrivilleges extends Activity {
 		}
 		
 	}
+	
+private class MyAsyncTaskAccept extends AsyncTask<String,Integer,Void>{
+	@Override
+	protected void onPostExecute(Void result) {
+		// TODO Auto-generated method stub
+		pb.setVisibility(View.GONE);
+		Toast.makeText(getApplicationContext(), "Zmieniono uprawnienia u¿ytkownka!", Toast.LENGTH_LONG).show();
 	}
 
+	@Override
+	protected void onProgressUpdate(Integer... progress) {
+		// TODO Auto-generated method stub
+		pb.setProgress(progress[0]);
+	}
+	@Override
+	protected Void doInBackground(String... params) {
+		// TODO Auto-generated method stub
+		try {
+			postData(params[0],params[1]);
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private void postData(String un, String accepted) throws NoSuchAlgorithmException {
+		// TODO Auto-generated method stub
+		// Create a new HttpClient and Post Header
+					HttpClient httpclient = new DefaultHttpClient();
+					HttpPost httppost = new HttpPost("http://mandrusz.pusku.com/include/accept.php");
+		 
+					try {
+						// Add your data
+						ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+						nameValuePairs.add(new BasicNameValuePair("accepted",accepted));
+						nameValuePairs.add(new BasicNameValuePair("un", un));
+						httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+		 
+						// Execute HTTP Post Request
+						httpclient.execute(httppost);
+
+		 
+					} catch (ClientProtocolException e) {
+						// TODO Auto-generated catch block
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+					}
+	}
+	
+}
+}
 

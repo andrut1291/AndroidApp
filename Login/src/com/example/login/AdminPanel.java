@@ -46,9 +46,6 @@ public class AdminPanel extends Activity {
 			@SuppressWarnings("unchecked")
 			public void onItemClick(AdapterView<?> parentAdapter, View view, int position,
 		                             long id) {
-
-		         // We know the View is a TextView so we can cast it
-		         //TextView clickedView = (TextView) view;
 		    	 HashMap<String,String> newHash = new HashMap<String,String>();
 		    	 newHash=(HashMap<String, String>) listView.getItemAtPosition(position);
 		    	 String userName = newHash.get("line1").toString();
