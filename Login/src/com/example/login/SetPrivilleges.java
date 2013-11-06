@@ -28,6 +28,9 @@ public class SetPrivilleges extends Activity {
 	Button exit;
 	Button delateAccount;
 	ProgressBar pb;
+	
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -64,7 +67,7 @@ public class SetPrivilleges extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				pb.setVisibility(View.VISIBLE);
-				new MyAsyncTaskDelate().execute(un,accepted);
+				new MyAsyncTaskDelate().execute(un);
 			}
 		});
 		onOff.setOnClickListener(new View.OnClickListener() {
@@ -102,7 +105,7 @@ public class SetPrivilleges extends Activity {
 		protected Void doInBackground(String... params) {
 			// TODO Auto-generated method stub
 			try {
-				postData(params[0],params[1]);
+				postData(params[0]);
 			} catch (NoSuchAlgorithmException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -110,7 +113,7 @@ public class SetPrivilleges extends Activity {
 			return null;
 		}
 
-		private void postData(String un, String accepted) throws NoSuchAlgorithmException {
+		private void postData(String un) throws NoSuchAlgorithmException {
 			// TODO Auto-generated method stub
 			// Create a new HttpClient and Post Header
 						HttpClient httpclient = new DefaultHttpClient();
@@ -119,7 +122,6 @@ public class SetPrivilleges extends Activity {
 						try {
 							// Add your data
 							ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-							nameValuePairs.add(new BasicNameValuePair("accepted",accepted));
 							nameValuePairs.add(new BasicNameValuePair("un", un));
 							httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 			 

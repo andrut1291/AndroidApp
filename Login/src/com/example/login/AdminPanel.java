@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
@@ -33,11 +34,20 @@ public class AdminPanel extends Activity {
 	private String jsonResult;
 	private String url = "http://mandrusz.pusku.com/include/get_users.php";
 	private ListView listView;
+	private ProgressBar pb;
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		accessWebService();
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.admin_panel);
+		pb = (ProgressBar) findViewById(R.id.progressBarAdminPanel);
+		pb.setVisibility(View.GONE);
 		listView = (ListView) findViewById(R.id.listViewUsers);
 		accessWebService();
 		// React to user clicks on item
@@ -61,8 +71,12 @@ public class AdminPanel extends Activity {
 	}
 
 	// Async Task to access the web
-	private class JsonReadTask extends AsyncTask<String, Void, String> {
-		@Override
+	private class JsonReadTask extends AsyncTask<String, Integer, String> {
+		
+		protected void onProgressUpdate(Integer... progress) {
+			// TODO Auto-generated method stub
+			pb.setProgress(progress[0]);
+		}
 		protected String doInBackground(String... params) {
 			HttpClient httpclient = new DefaultHttpClient();
 			HttpPost httppost = new HttpPost(params[0]);
@@ -102,10 +116,12 @@ public class AdminPanel extends Activity {
 		@Override
 		protected void onPostExecute(String result) {
 			ListDrwaer();
+			pb.setVisibility(View.GONE);
 		}
 	}// end async task
 
 	public void accessWebService() {
+		pb.setVisibility(View.VISIBLE);
 		JsonReadTask task = new JsonReadTask();
 		// passes values for the urls string array
 		task.execute(new String[] { url });
@@ -114,6 +130,7 @@ public class AdminPanel extends Activity {
 	// build hash set for list view
 	public void ListDrwaer() {
 		List<Map<String, String>> userList = new ArrayList<Map<String, String>>();
+		userList.clear();
 		try {
 			JSONObject jsonResponse = new JSONObject(jsonResult);
 			JSONArray jsonMainNode = jsonResponse.optJSONArray("users");

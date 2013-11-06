@@ -29,17 +29,6 @@
     </EditText>
 
     <TextView
-        android:id="@+id/textViewRegisterLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonRegisterRegister"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="14dp"
-        android:clickable="true"
-        android:text="@string/login_new_user"
-        android:textColor="#000090" />
-
-    <TextView
         android:id="@+id/textViewRegisterPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -64,13 +53,43 @@
         android:layout_below="@+id/editTextRegisterEmail"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:id="@+id/textViewRegisterLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp"
+        android:clickable="true"
+        android:text="@string/login_new_user"
+        android:textColor="#000090" />
+
+    <EditText
+        android:id="@+id/editTextRepeatPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonRegisterRegister"
+        android:layout_alignLeft="@+id/editTextRegisterEmail"
+        android:layout_marginBottom="20dp"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/textViewReapeatPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/editTextRepeatPassword"
+        android:layout_alignLeft="@+id/buttonRegisterRegister"
+        android:text="@string/repeat_pass"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
     <Button
         android:id="@+id/buttonRegisterRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/editTextRegisterPassword"
+        android:layout_above="@+id/textViewRegisterLogin"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="14dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/Register" />
 
 </RelativeLayout>

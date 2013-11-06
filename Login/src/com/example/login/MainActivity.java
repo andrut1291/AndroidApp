@@ -55,6 +55,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
+				pb.setVisibility(View.VISIBLE);
 				pass = password.getText().toString();
 				un = email.getText().toString();
 				if (password.getText().toString().length() < 1
@@ -70,7 +71,6 @@ public class MainActivity extends Activity {
 						startActivity(MainMenuActivity);
 						finish();
 					} else {
-						pb.setVisibility(View.VISIBLE);
 						MyAsyncTaskLogin Connection = new MyAsyncTaskLogin();
 						try {
 							htmlResponse = Connection.execute(pass, un).get()
@@ -105,7 +105,25 @@ public class MainActivity extends Activity {
 											});
 							AlertDialog alert = builder.create();
 							alert.show();
-						} else if (htmlResponse
+						} else if (htmlResponse.contentEquals("FAILED_NOT_ACCEPTED") == true){
+							AlertDialog.Builder builder = new AlertDialog.Builder(
+									MainActivity.this);
+							builder.setMessage("Nie zosta³eœ zaakceptowany przez Administratora!")
+									.setCancelable(false)
+									.setPositiveButton(
+											"OK",
+											new DialogInterface.OnClickListener() {
+												public void onClick(
+														DialogInterface dialog,
+														int id) {
+													// do things
+												}
+											});
+							AlertDialog alert = builder.create();
+							alert.show();
+							
+						}
+							else if (htmlResponse
 								.contentEquals("FAILED_BAD_USER") == true) {
 							AlertDialog.Builder builder = new AlertDialog.Builder(
 									MainActivity.this);
@@ -149,6 +167,7 @@ public class MainActivity extends Activity {
 		@Override
 		protected String doInBackground(String... params) {
 			// TODO Auto-generated method stub
+			pb.setVisibility(View.VISIBLE);
 			return postData(params[0], params[1]);
 		}
 

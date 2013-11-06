@@ -17,5 +17,6 @@
     <string name="delate_acc">Usuń konto</string>
     <string name="set_privilleges">Nadaj uprawnienia</string>
     <string name="exit">Wyjście</string>
+    <string name="repeat_pass">Powtórz hasło</string>
 
 </resources>
