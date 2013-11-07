@@ -18,5 +18,8 @@
     <string name="set_privilleges">Nadaj uprawnienia</string>
     <string name="exit">Wyjście</string>
     <string name="repeat_pass">Powtórz hasło</string>
+    <string name="chart_input_1">Wykres wejście nr. 1</string>
+    <string name="admin">admin</string>
+    <string name="chart1">Wykres </string>
 
 </resources>

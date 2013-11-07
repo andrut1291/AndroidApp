@@ -64,10 +64,13 @@ public class MainActivity extends Activity {
 					Toast.makeText(MainActivity.this, "Nie wpisano danych!",
 							Toast.LENGTH_LONG).show();
 				} else {
-					if (pass.contentEquals("admin")
-							&& un.contentEquals("admin")) {
+					if (pass.contentEquals(getString(R.string.admin))
+							&& un.contentEquals(getString(R.string.admin))) {
 						Intent MainMenuActivity = new Intent(
 								"com.example.login.MainMenu");
+						Bundle extras = new Bundle();
+						extras.putString("un", un);
+						MainMenuActivity.putExtras(extras);
 						startActivity(MainMenuActivity);
 						finish();
 					} else {
@@ -86,6 +89,9 @@ public class MainActivity extends Activity {
 						if (htmlResponse.contentEquals("SUCCESS") == true) {
 							Intent MainMenuActivity = new Intent(
 									"com.example.login.MainMenu");
+							Bundle extras = new Bundle();
+							extras.putString("un", un);
+							MainMenuActivity.putExtras(extras);
 							startActivity(MainMenuActivity);
 							finish();
 						} else if (htmlResponse
