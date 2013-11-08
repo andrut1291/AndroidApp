@@ -4,7 +4,7 @@
               style="@style/sample_activity"
     >
 
-    <com.androidplot.xy.XYPlot
+    <com.example.login.MultitouchPlot
     android:id="@+id/stepChartExamplePlot"
     style="@style/plotStyle1"
     android:layout_width="fill_parent"
