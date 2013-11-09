@@ -61,6 +61,14 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+                <activity
+            android:name="com.example.login.ChartFromButton2"
+            android:label="@string/chart1" >
+            <intent-filter>
+                <action android:name="com.example.login.ChartFromButton2" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

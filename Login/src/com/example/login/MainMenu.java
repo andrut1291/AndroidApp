@@ -39,7 +39,7 @@ public class MainMenu extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent chart = new Intent("com.example.login.ChartFromButton1");
+				Intent chart = new Intent("com.example.login.ChartFromButton2");
 				startActivity(chart);
 			}
 		});
