@@ -79,7 +79,7 @@ public class MultitouchPlot extends XYPlot implements OnTouchListener
 
 			if(minYSeriesValue == null || minYSeriesValue.doubleValue() > series.getY(i).doubleValue())
 				minYSeriesValue = series.getY(i);
-			if(maxYSeriesValue == null || maxYSeriesValue.doubleValue() < series.getX(i).doubleValue())
+			if(maxYSeriesValue == null || maxYSeriesValue.doubleValue() < series.getY(i).doubleValue())
 				maxYSeriesValue = series.getY(i);
 		}
 		return super.addSeries(series, formatter);
