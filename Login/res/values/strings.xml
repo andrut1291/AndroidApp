@@ -25,5 +25,9 @@
     <string name="choose_start_time">Wybierz czas początkowy</string>
     <string name="choose_time_range">Wybierz zakres czasu (0-15min)</string>
     <string name="choose_date">Wybierz datę</string>
+    <string name="check">Sprawdź !</string>
+    <string name="charts">Wykresy</string>
+    <string name="current_state">Stan aktualny</string>
+    <string name="stats">Statystyki</string>
 
 </resources>

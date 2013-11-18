@@ -23,7 +23,6 @@ import android.widget.Toast;
 
 public class MainMenu extends Activity {
 	DatePicker datePicker;
-	Button adminPanel;
 	Button chart1;
 	Spinner inputSpinner;
 	SeekBar sBar;
@@ -39,7 +38,6 @@ public class MainMenu extends Activity {
 		// //////Ustawienia kalendaarza
 		final Calendar cal = Calendar.getInstance();
 		// /////////
-		adminPanel = (Button) findViewById(R.id.buttonAdminPanel);
 		chart1 = (Button) findViewById(R.id.buttonChart1);
 		inputSpinner = (Spinner) findViewById(R.id.spinnerChooseInput);
 		timePicker = (TimePicker) findViewById(R.id.timePicker1);
@@ -130,23 +128,6 @@ public class MainMenu extends Activity {
 		ArrayAdapter<String> inputAdapter = new ArrayAdapter<String>(
 				MainMenu.this, android.R.layout.simple_spinner_item, inputs);
 		inputSpinner.setAdapter(inputAdapter);
-		Bundle extras = getIntent().getExtras();
-		String un = extras.getString("un");
-		if (un.contentEquals(getString(R.string.admin))) {
-			adminPanel.setVisibility(View.VISIBLE);
-			adminPanel.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					// TODO Auto-generated method stub
-					Intent adminPanel = new Intent(
-							"com.example.login.AdminPanel");
-					startActivity(adminPanel);
-				}
-			});
-		} else {
-			adminPanel.setVisibility(View.INVISIBLE);
-			adminPanel.setClickable(false);
-		}
 		chart1.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -162,7 +143,6 @@ public class MainMenu extends Activity {
 				Intent chart = new Intent("com.example.login.ChartFromButton2");
 				chart.putExtras(extras);
 				startActivity(chart);
-
 			}
 		});
 	}

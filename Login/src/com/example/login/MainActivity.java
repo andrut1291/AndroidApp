@@ -67,7 +67,7 @@ public class MainActivity extends Activity {
 					if (pass.contentEquals(getString(R.string.admin))
 							&& un.contentEquals(getString(R.string.admin))) {
 						Intent MainMenuActivity = new Intent(
-								"com.example.login.MainMenu");
+								"com.example.login.Main");
 						Bundle extras = new Bundle();
 						extras.putString("un", un);
 						MainMenuActivity.putExtras(extras);
@@ -88,7 +88,7 @@ public class MainActivity extends Activity {
 
 						if (htmlResponse.contentEquals("SUCCESS") == true) {
 							Intent MainMenuActivity = new Intent(
-									"com.example.login.MainMenu");
+									"com.example.login.Main");
 							Bundle extras = new Bundle();
 							extras.putString("un", un);
 							MainMenuActivity.putExtras(extras);

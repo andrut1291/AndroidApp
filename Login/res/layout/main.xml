@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout
+	android:id="@+id/widget34"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+
+<ImageView
+    android:id="@+id/imageViewLogo"
+    android:layout_width="238dp"
+    android:layout_height="120dp"
+    android:layout_x="36dp"
+    android:layout_y="7dp"
+    android:src="@drawable/ic_launcher" />
+
+<Button
+    android:id="@+id/ButtonStats"
+    android:layout_width="155dp"
+    android:layout_height="151dp"
+    android:layout_x="-1dp"
+    android:layout_y="308dp"
+    android:text="@string/stats" />
+
+<Button
+    android:id="@+id/ButtonExit"
+    android:layout_width="161dp"
+    android:layout_height="152dp"
+    android:layout_x="158dp"
+    android:layout_y="308dp"
+    android:text="@string/exit" />
+
+<Button
+    android:id="@+id/ButtonCharts"
+    android:layout_width="161dp"
+    android:layout_height="152dp"
+    android:layout_x="158dp"
+    android:layout_y="156dp"
+    android:text="@string/charts" />
+
+<Button
+    android:id="@+id/ButtonCurrentState"
+    android:layout_width="155dp"
+    android:layout_height="151dp"
+    android:layout_x="-2dp"
+    android:layout_y="156dp"
+    android:text="@string/current_state" />
+
+</AbsoluteLayout>

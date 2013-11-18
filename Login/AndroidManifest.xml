@@ -61,11 +61,27 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-                <activity
+        <activity
             android:name="com.example.login.ChartFromButton2"
             android:label="@string/chart1" >
             <intent-filter>
                 <action android:name="com.example.login.ChartFromButton2" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.login.Main"
+            android:label="@string/MainMenu" >
+            <intent-filter>
+                <action android:name="com.example.login.Main" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+                <activity
+            android:name="com.example.login.CurrentState"
+            android:label="@string/MainMenu" >
+            <intent-filter>
+                <action android:name="com.example.login.CurrentState" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
