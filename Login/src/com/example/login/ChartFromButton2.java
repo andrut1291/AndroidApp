@@ -53,6 +53,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -75,12 +76,10 @@ public class ChartFromButton2 extends Activity {
 		Bundle extras = getIntent().getExtras();
 		min = extras.getString("min");
 		max = extras.getString("max");
-		min = extras.getString("min");
 		input = extras.getString("input");
 		pb = (ProgressBar) findViewById(R.id.progressBarChart);
 		pb.setVisibility(View.VISIBLE);
 		MultitouchPlot mySimpleXYPlot = (MultitouchPlot) findViewById(R.id.stepChartExamplePlot);
-
 		JsonReadTask task = new JsonReadTask();
 		task.execute(new String[] { url, min, max, input });
 		try {
@@ -92,108 +91,100 @@ public class ChartFromButton2 extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if (time.size() < 3) {
-			Toast.makeText(getApplicationContext(),
-					"Brak danych na serwerze w zadanym oknie czasownym",
-					Toast.LENGTH_LONG).show();
-			finish();
-		} else {
-			XYSeries series2 = new SimpleXYSeries(time, data,
-					"Wartość napięcia");
-			mySimpleXYPlot.getGraphWidget().getGridBackgroundPaint()
-					.setColor(Color.WHITE);
-			mySimpleXYPlot.getGraphWidget().getDomainGridLinePaint()
-					.setColor(Color.BLACK);
-			// mySimpleXYPlot.getGraphWidget().getDomainGridLinePaint().setPathEffect(new
-			// DashPathEffect(new float[] { 1, 1 }, 1));
-			mySimpleXYPlot.getGraphWidget().getRangeGridLinePaint()
-					.setColor(Color.BLACK);
-			// mySimpleXYPlot.getGraphWidget().getRangeGridLinePaint().setPathEffect(new
-			// DashPathEffect(new float[] { 1, 1 }, 1));
-			mySimpleXYPlot.getGraphWidget().getDomainOriginLinePaint()
-					.setColor(Color.BLACK);
-			mySimpleXYPlot.getGraphWidget().getRangeOriginLinePaint()
-					.setColor(Color.BLACK);
-			mySimpleXYPlot.getGraphWidget().setMarginRight(5);
-			Paint lineFill = new Paint();
-			lineFill.setAlpha(200);
-			lineFill.setShader(new LinearGradient(0, 0, 0, 250, Color.WHITE,
-					Color.BLUE, Shader.TileMode.MIRROR));
+		//Obsluga braku danych
+				XYSeries series2 = new SimpleXYSeries(time, data,
+						"Wartość napięcia");
+				mySimpleXYPlot.getGraphWidget().getGridBackgroundPaint()
+						.setColor(Color.WHITE);
+				mySimpleXYPlot.getGraphWidget().getDomainGridLinePaint()
+						.setColor(Color.BLACK);
+				// mySimpleXYPlot.getGraphWidget().getDomainGridLinePaint().setPathEffect(new
+				// DashPathEffect(new float[] { 1, 1 }, 1));
+				mySimpleXYPlot.getGraphWidget().getRangeGridLinePaint()
+						.setColor(Color.BLACK);
+				// mySimpleXYPlot.getGraphWidget().getRangeGridLinePaint().setPathEffect(new
+				// DashPathEffect(new float[] { 1, 1 }, 1));
+				mySimpleXYPlot.getGraphWidget().getDomainOriginLinePaint()
+						.setColor(Color.BLACK);
+				mySimpleXYPlot.getGraphWidget().getRangeOriginLinePaint()
+						.setColor(Color.BLACK);
+				mySimpleXYPlot.getGraphWidget().setMarginRight(5);
+				Paint lineFill = new Paint();
+				lineFill.setAlpha(200);
+				lineFill.setShader(new LinearGradient(0, 0, 0, 250, Color.WHITE,
+						Color.BLUE, Shader.TileMode.MIRROR));
 
-			LineAndPointFormatter Format = new LineAndPointFormatter(Color.rgb(
-					0, 200, 0), // line color
-					Color.rgb(0, 100, 0), // point color
-					Color.rgb(150, 190, 150), null); // fill color (optional)
+				LineAndPointFormatter Format = new LineAndPointFormatter(Color.rgb(
+						0, 200, 0), // line color
+						Color.rgb(0, 100, 0), // point color
+						Color.rgb(150, 190, 150), null); // fill color (optional)
 
-			StepFormatter stepFormatter = new StepFormatter(Color.rgb(0, 0, 0),
-					Color.BLUE);
-			stepFormatter.getLinePaint().setStrokeWidth(1);
-			stepFormatter.getLinePaint().setAntiAlias(false);
-			stepFormatter.setFillPaint(lineFill);
+				StepFormatter stepFormatter = new StepFormatter(Color.rgb(0, 0, 0),
+						Color.BLUE);
+				stepFormatter.getLinePaint().setStrokeWidth(1);
+				stepFormatter.getLinePaint().setAntiAlias(false);
+				stepFormatter.setFillPaint(lineFill);
 
-			mySimpleXYPlot.addSeries(series2, stepFormatter);
-			mySimpleXYPlot.getGraphWidget().setMarginTop(10);
-			mySimpleXYPlot.setDomainValueFormat(new DecimalFormat("0"));
-			mySimpleXYPlot.setRangeBoundaries(1, 3, BoundaryMode.FIXED);
-			mySimpleXYPlot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, 1);
-			mySimpleXYPlot.setTicksPerRangeLabel(1);
-			mySimpleXYPlot.setDomainStep(XYStepMode.SUBDIVIDE, time.size());
-			mySimpleXYPlot.setTicksPerDomainLabel(time.size() / 6);
-			/*
-			 * mySimpleXYPlot.setDomainValueFormat(new Format() {
-			 * 
-			 * // create a simple date format that draws on the year portion of
-			 * our timestamp. // see
-			 * http://download.oracle.com/javase/1.4.2/docs
-			 * /api/java/text/SimpleDateFormat.html // for a full description of
-			 * SimpleDateFormat. private SimpleDateFormat dateFormat = new
-			 * SimpleDateFormat("MM-dd HH:mm");
-			 * 
-			 * @Override public StringBuffer format(Object obj, StringBuffer
-			 * toAppendTo, FieldPosition pos) {
-			 * 
-			 * // because our timestamps are in seconds and SimpleDateFormat
-			 * expects milliseconds // we multiply our timestamp by 1000: long
-			 * timestamp = ((Number) obj).longValue() * 1000; Date date = new
-			 * Date(timestamp); return dateFormat.format(date, toAppendTo, pos);
-			 * }
-			 * 
-			 * @Override public Object parseObject(String source, ParsePosition
-			 * pos) { return null;
-			 * 
-			 * } });
-			 */
-			mySimpleXYPlot.setRangeValueFormat(new Format() {
-				@Override
-				public StringBuffer format(Object obj, StringBuffer toAppendTo,
-						FieldPosition pos) {
-					Number num = (Number) obj;
-					switch (num.intValue()) {
-					case 1:
-						toAppendTo.append("0 [V]");
-						break;
-					case 2:
-						toAppendTo.append("12 [V]");
-						break;
-					case 3:
-						toAppendTo.append("24 [V]");
-						break;
-					default:
-						toAppendTo.append("Unknown");
-						break;
+				mySimpleXYPlot.addSeries(series2, stepFormatter);
+				mySimpleXYPlot.getGraphWidget().setMarginTop(10);
+				mySimpleXYPlot.setDomainValueFormat(new DecimalFormat("0"));
+				mySimpleXYPlot.setRangeBoundaries(1, 3, BoundaryMode.FIXED);
+				mySimpleXYPlot.setRangeStep(XYStepMode.INCREMENT_BY_VAL, 1);
+				mySimpleXYPlot.setTicksPerRangeLabel(1);
+				mySimpleXYPlot.setDomainStep(XYStepMode.SUBDIVIDE, time.size());
+				//mySimpleXYPlot.setTicksPerDomainLabel(time.size());
+				/*
+				 * mySimpleXYPlot.setDomainValueFormat(new Format() {
+				 * 
+				 * // create a simple date format that draws on the year portion of
+				 * our timestamp. // see
+				 * http://download.oracle.com/javase/1.4.2/docs
+				 * /api/java/text/SimpleDateFormat.html // for a full description of
+				 * SimpleDateFormat. private SimpleDateFormat dateFormat = new
+				 * SimpleDateFormat("MM-dd HH:mm");
+				 * 
+				 * @Override public StringBuffer format(Object obj, StringBuffer
+				 * toAppendTo, FieldPosition pos) {
+				 * 
+				 * // because our timestamps are in seconds and SimpleDateFormat
+				 * expects milliseconds // we multiply our timestamp by 1000: long
+				 * timestamp = ((Number) obj).longValue() * 1000; Date date = new
+				 * Date(timestamp); return dateFormat.format(date, toAppendTo, pos);
+				 * }
+				 * 
+				 * @Override public Object parseObject(String source, ParsePosition
+				 * pos) { return null;
+				 * 
+				 * } });
+				 */
+				mySimpleXYPlot.setRangeValueFormat(new Format() {
+					@Override
+					public StringBuffer format(Object obj, StringBuffer toAppendTo,
+							FieldPosition pos) {
+						Number num = (Number) obj;
+						switch (num.intValue()) {
+						case 1:
+							toAppendTo.append("0 [V]");
+							break;
+						case 2:
+							toAppendTo.append("12 [V]");
+							break;
+						case 3:
+							toAppendTo.append("24 [V]");
+							break;
+						default:
+							toAppendTo.append("Unknown");
+							break;
+						}
+						return toAppendTo;
 					}
-					return toAppendTo;
-				}
 
-				@Override
-				public Object parseObject(String source, ParsePosition pos) {
-					return null;
-				}
-			});
-		}
-
+					@Override
+					public Object parseObject(String source, ParsePosition pos) {
+						return null;
+					}
+				});
 	}
-
 	private class JsonReadTask extends AsyncTask<String, Integer, String> {
 
 		protected void onProgressUpdate(Integer... progress) {

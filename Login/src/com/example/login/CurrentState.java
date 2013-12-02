@@ -46,7 +46,7 @@ public class CurrentState extends Activity {
 		inputSpinner = (Spinner) findViewById(R.id.spinner1);
 		iView = (ImageView) findViewById(R.id.imageViewLogo);
 		statusTextView = (TextView) findViewById(R.id.textViewStatus);
-		pb = (ProgressBar) findViewById(R.id.progressBar1);
+		pb = (ProgressBar) findViewById(R.id.progressBarStats);
 		pb.setVisibility(View.GONE);
 		
 		statusTextView.setText("");
